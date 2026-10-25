@@ -26,13 +26,13 @@ public class BurgerTest {
     private Bun bun;
 
     @Mock
-    private Ingredient ingredient;
+    private Ingredient ingredientBun;
 
     @Mock
-    private Ingredient ingredient1;
+    private Ingredient ingredientSauce;
 
     @Mock
-    private Ingredient ingredient2;
+    private Ingredient ingredientFilling;
 
 
     @Before
@@ -48,37 +48,37 @@ public class BurgerTest {
 
     @Test
     public void addIngredientsTest() {
-        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredientBun);
         assertEquals("Список должен увеличиться", 1, burger.ingredients.size());
-        assertTrue("Ингредиент должен совпадать", burger.ingredients.contains(ingredient));
+        assertTrue("Ингредиент должен совпадать", burger.ingredients.contains(ingredientBun));
     }
 
     @Test
     public void removeIngredientsTest() {
-        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredientBun);
         burger.removeIngredient(0);
         assertEquals("Список должен стать пустым", 0, burger.ingredients.size());
     }
 
     @Test
     public void moveIngredientsTest() {
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        burger.addIngredient(ingredientSauce);
+        burger.addIngredient(ingredientFilling);
         burger.moveIngredient(0, 1);
-        assertEquals("В списке должен быть под первым номером", 1, burger.ingredients.indexOf(ingredient1));
-        assertEquals("В списке должен быть нулевым", 0, burger.ingredients.indexOf(ingredient2));
+        assertEquals("В списке должен быть под первым номером", 1, burger.ingredients.indexOf(ingredientSauce));
+        assertEquals("В списке должен быть нулевым", 0, burger.ingredients.indexOf(ingredientFilling));
     }
 
     @Test
     public void getReceiptTest() {
         Mockito.when(bun.getName()).thenReturn("red bun");
-        Mockito.when(ingredient.getType()).thenReturn(SAUCE);
-        Mockito.when(ingredient.getName()).thenReturn("chili sauce");
+        Mockito.when(ingredientBun.getType()).thenReturn(SAUCE);
+        Mockito.when(ingredientBun.getName()).thenReturn("chili sauce");
         Mockito.when(bun.getPrice()).thenReturn(300f);
-        Mockito.when(ingredient.getPrice()).thenReturn(300f);
+        Mockito.when(ingredientBun.getPrice()).thenReturn(300f);
 
         burger.setBuns(bun);
-        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredientBun);
         String receipt = burger.getReceipt();
 
         assertNotNull("Чек должен быть", receipt);
